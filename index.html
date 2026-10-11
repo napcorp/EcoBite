@@ -1,37 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Invisible metadata and page configurations -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First HTML Website</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EcoBite — Hyper-local, zero-emission fresh grocery and artisan pantry delivery. Farm produce, sourdough, and surplus food delivered by electric cargo fleet.">
+  <meta name="theme-color" content="#166534">
+  <title>EcoBite — Hyper-Local & Zero-Emission Provisions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23166534'><path d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/></svg>">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Main visible content starts here -->
-    <header>
-        <h1>Welcome to My Website</h1>
-        <p>A simple, clean webpage built entirely with HTML.</p>
-    </header>
+  <header class="site-header">
+    <div class="header-top">
+      <a href="/" class="logo" aria-label="EcoBite Home">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+        </svg>
+        <span class="logo-text">EcoBite</span>
+      </a>
 
-    <main>
-        <section>
-            <h2>About This Page</h2>
-            <p>This is a standard paragraph element. HTML uses tags to structure text, allowing web browsers to understand and display content correctly.</p>
-        </section>
+      <div class="search-wrapper">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="search" id="search-input" placeholder="Search produce, bakeries, producers, or tags..." autocomplete="off" aria-label="Search products">
+      </div>
 
-        <section>
-            <h2>Useful Resources</h2>
-            <ul>
-                <li>Learn more via this <a href="https://www.w3schools.com/html/html_examples.asp" target="_blank">W3Schools HTML Guide</a>.</li>
-                <li>Read the core documentation on the <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development" target="_blank">MDN Web Docs</a>.</li>
-            </ul>
-        </section>
-    </main>
+      <button class="cart-toggle" id="cart-toggle" aria-label="Open shopping cart">
+        <svg class="cart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+          <path d="M3 6h18"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </button>
+    </div>
 
-    <footer>
-        <p>&copy; 2026 My Web Page. All rights reserved.</p>
-    </footer>
+    <div class="impact-bar-wrapper">
+      <div class="impact-bar">
+        <div class="impact-fill" id="impact-fill">
+          <span class="impact-leaf" aria-hidden="true"></span>
+        </div>
+      </div>
+      <p class="impact-text" id="impact-text">Add items to view your real-time carbon offset</p>
+    </div>
 
+    <div class="category-pills" id="category-pills">
+      <button class="pill active" data-category="all">All Provisions</button>
+      <button class="pill" data-category="farm-fresh">Farm Fresh</button>
+      <button class="pill" data-category="artisan-pantry">Artisan Pantry</button>
+      <button class="pill" data-category="rescue-basket">Rescue Basket</button>
+    </div>
+  </header>
+
+  <main id="store-view">
+    <section class="pincode-section">
+      <div class="pincode-card">
+        <div class="pincode-header">
+          <span class="pincode-pill">Zero-Emission Radius</span>
+          <h2>Check Cargo Delivery Coverage</h2>
+        </div>
+        <p>Enter your 6-digit postal code to verify if your address is within our electric cargo courier zone.</p>
+        <div class="pincode-input-wrapper">
+          <input type="text" id="pincode-input" placeholder="Enter 6-digit PIN" maxlength="6" inputmode="numeric" aria-label="Enter pincode">
+          <button id="pincode-check">Verify Area</button>
+        </div>
+        <p class="pincode-result" id="pincode-result"></p>
+      </div>
+    </section>
+
+    <section class="products-section">
+      <div class="section-header">
+        <h1 class="section-title" id="section-title">All Provisions</h1>
+        <span class="catalog-status" id="catalog-status">Direct from local producers</span>
+      </div>
+      <div class="products-grid" id="products-grid"></div>
+      <p class="no-results" id="no-results" style="display:none;">No matching items found. Please try a different query.</p>
+    </section>
+  </main>
+
+  <div class="overlay" id="overlay"></div>
+
+  <aside class="cart-sidebar" id="cart-sidebar" aria-label="Shopping cart">
+    <div class="cart-header">
+      <div>
+        <h2>Green Receipt</h2>
+        <span class="cart-subtitle">Verified local provenance</span>
+      </div>
+      <button class="cart-close" id="cart-close" aria-label="Close cart">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cart-items" id="cart-items"></div>
+
+    <div class="cart-empty" id="cart-empty">
+      <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <p>Your basket is currently empty. Add fresh harvests or artisanal staples to begin.</p>
+    </div>
+
+    <div class="cart-footer" id="cart-footer">
+      <div class="jar-back-toggle">
+        <label class="toggle-label" for="jar-back-toggle">
+          <div class="toggle-info">
+            <span class="toggle-text">Circular Return: 2 glass deposit jars</span>
+            <span class="toggle-discount">-₹30 Deposit Refund</span>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="jar-back-toggle">
+            <span class="toggle-slider"></span>
+          </div>
+        </label>
+        <div class="cashback-badge" id="cashback-badge">₹30 Jar Refund Applied</div>
+      </div>
+
+      <div class="cart-metrics">
+        <div class="metric">
+          <span class="metric-label">CO₂ Offset</span>
+          <span class="metric-value" id="cart-co2">0g</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Plastic Diverted</span>
+          <span class="metric-value" id="cart-plastic">0g</span>
+        </div>
+      </div>
+
+      <div class="cart-total">
+        <span>Order Subtotal</span>
+        <span id="cart-total-price">₹0</span>
+      </div>
+
+      <button class="place-order-btn" id="place-order-btn">Proceed to Zero-Emission Delivery</button>
+    </div>
+  </aside>
+
+  <div class="product-drawer" id="product-drawer" aria-label="Product provenance details">
+    <button class="drawer-close" id="drawer-close" aria-label="Close product details">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <div class="drawer-content" id="drawer-content"></div>
+  </div>
+
+  <div class="tracking-view" id="tracking-view">
+    <div class="tracking-container">
+      <span class="tracking-eyebrow">Zero-Emission Fulfillment</span>
+      <h1>Order Confirmed</h1>
+      <p class="tracking-subtitle">Dispatched with our dedicated electric cargo fleet</p>
+
+      <div class="emissions-badge">
+        <span class="emissions-value">0.00g CO₂</span>
+        <span class="emissions-label">Delivery phase emissions</span>
+      </div>
+
+      <div class="tracking-path">
+        <svg viewBox="0 0 600 120" class="tracking-svg" id="tracking-svg">
+          <path d="M 50 60 Q 175 20 300 60 Q 425 100 550 60" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round"/>
+          <path d="M 50 60 Q 175 20 300 60 Q 425 100 550 60" class="track-progress" id="track-progress" fill="none" stroke="#166534" stroke-width="4" stroke-linecap="round"/>
+          <g id="bike-icon" class="bike-icon">
+            <circle cx="0" cy="0" r="16" fill="#166534" filter="drop-shadow(0 2px 6px rgba(22, 101, 52, 0.35))"/>
+            <path d="M-6 4 a3.2 3.2 0 1 0 6.4 0 a3.2 3.2 0 1 0 -6.4 0 M3 4 a3.2 3.2 0 1 0 6.4 0 a3.2 3.2 0 1 0 -6.4 0 M-3 4 L0 -3 L4 -3 M-1 -1 L5 4" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <rect x="-6" y="-6" width="4.5" height="4" rx="0.8" fill="#38bdf8"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="tracking-phases">
+        <div class="phase active" id="phase-1">
+          <div class="phase-dot"></div>
+          <div>
+            <span class="phase-label">Order Packed</span>
+            <span class="phase-time" id="phase-1-time"></span>
+          </div>
+        </div>
+        <div class="phase" id="phase-2">
+          <div class="phase-dot"></div>
+          <div>
+            <span class="phase-label">E-Cargo Dispatched</span>
+            <span class="phase-time" id="phase-2-time"></span>
+          </div>
+        </div>
+        <div class="phase" id="phase-3">
+          <div class="phase-dot"></div>
+          <div>
+            <span class="phase-label">Arriving at Doorstep</span>
+            <span class="phase-time" id="phase-3-time">7 mins left</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tracking-metrics" id="tracking-metrics"></div>
+
+      <button class="back-to-store" id="back-to-store">Return to Store</button>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
